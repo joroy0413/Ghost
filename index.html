@@ -4,20 +4,75 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Loading...</title>
+
 <style>
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000;}
-#ghost{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;animation:flash .08s infinite;}
+html, body{
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#000;
+    font-family:Arial, sans-serif;
+}
+
+#ghost{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:none;
+}
+
+#start{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    padding:20px 40px;
+    font-size:28px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.flash{
+    animation:flash .08s infinite;
+}
+
 @keyframes flash{
-0%{filter:brightness(1);}
-50%{filter:brightness(4);}
-100%{filter:brightness(1);}
+    0%{filter:brightness(1);}
+    50%{filter:brightness(4);}
+    100%{filter:brightness(1);}
 }
 </style>
 </head>
+
 <body>
+
+<button id="start">클릭하세요</button>
+
 <img id="ghost" src="20260703_121349.jpg" alt="">
-<audio autoplay>
-<source src="scream.mp3" type="audio/mpeg">
+
+<audio id="sound">
+    <source src="scream.mp3" type="audio/mpeg">
 </audio>
+
+<script>
+const btn = document.getElementById("start");
+const img = document.getElementById("ghost");
+const sound = document.getElementById("sound");
+
+btn.addEventListener("click", () => {
+    btn.style.display = "none";
+
+    img.style.display = "block";
+    img.classList.add("flash");
+
+    sound.volume = 1;
+    sound.play().catch(() => {});
+});
+</script>
+
 </body>
 </html>
